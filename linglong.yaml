@@ -1,0 +1,27 @@
+version: "1"
+
+package:
+  id: io.github.GraphBuilder
+  name: GraphBuilder
+  version: 1.0.3.1
+  kind: app
+  description: |
+    A visualized tool to create a graph
+
+command:
+  - /opt/apps/io.github.GraphBuilder/files/bin/GraphBuilder
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/wjyrich/GraphBuilder.git
+    version: master
+    commit: b289788baef251ce4ad3f30876c7b466002d3e92
+
+build: |
+  cd /project/linglong/sources/GraphBuilder.git
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
